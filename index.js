@@ -56,8 +56,34 @@ app.get('/v1/lion-school/alunos', cors(), async function (request, response, nex
 
     let statusCode
     let dadosAluno = {}
+    let aluno
 
-    let aluno = cursos.getInfoAluno()
+    let siglaCurso = request.query.curso
+    let statusAluno = request.query.status
+
+    if(siglaCurso != undefined){
+
+        if(siglaCurso == "" || siglaCurso == undefined || !isNaN(siglaCurso)){
+            statusCode = 400
+            dadosAluno.message = 'Não foi possível fazer a busca, pois os dados de entrada(curso) estão incorretos'
+        }else{
+            aluno = cursos.getAlunosCurso(siglaCurso)
+        }
+
+    }else if(statusAluno != undefined){
+
+        if(statusAluno == "" || statusAluno == undefined || !isNaN(statusAluno)){
+            statusCode = 400
+            dadosAluno.message = 'Não foi possível fazer a busca, pois os dados de entrada(curso) estão incorretos' 
+        }else{
+            aluno = cursos.getStatusAluno(statusAluno)
+    
+        }
+
+    }else{
+        aluno = cursos.getInfoAluno()
+    }
+
 
     if(aluno){
         statusCode = 200
@@ -70,6 +96,7 @@ app.get('/v1/lion-school/alunos', cors(), async function (request, response, nex
     response.status(statusCode)
     response.json(dadosAluno)
 })
+
 
 app.get('/v1/lion-school/alunos/:matricula', cors(), async function (request, response, next){
     let statusCode
@@ -96,53 +123,7 @@ app.get('/v1/lion-school/alunos/:matricula', cors(), async function (request, re
     
 })
 
-app.get('/v1/lion-school/aluno', cors(), async function (request, response, next){
-    let statusCode
-    let dadosCurso = {}
 
-    let siglaCurso = request.query.curso
-
-    if(siglaCurso == "" || siglaCurso == undefined || !isNaN(siglaCurso)){
-        statusCode = 400
-        dadosCurso.message = 'Não foi possível fazer a busca, pois os dados de entrada(curso) estão incorretos'
-    }else{
-        let infomacoesCurso = cursos.getAlunosCurso(siglaCurso)
-
-        if(infomacoesCurso){
-            statusCode = 200
-            dadosCurso = infomacoesCurso
-        }else{
-            statusCode = 400
-        }
-
-        response.status(statusCode)
-        response.json(dadosCurso)
-    }
-})
-
-app.get('/v1/lion-school/aluno/info', cors(), async function (request, response,next){
-    let statusCode 
-    let dadosAluno = {}
-
-    let statusAluno = request.query.status
-
-    if(statusAluno == "" || statusAluno == undefined || !isNaN(statusAluno)){
-        statusCode = 400
-        dadosAluno.message = 'Não foi possível fazer a busca, pois os dados de entrada(curso) estão incorretos' 
-    }else{
-        let infomacoesAluno = cursos.getStatusAluno(statusAluno)
-
-        if(infomacoesAluno){
-            statusCode = 200
-            dadosAluno = infomacoesAluno
-        }else{
-            statusCode = 400
-        }
-
-        response.status(statusCode)
-        response.json(dadosAluno)
-    }
-})
 app.listen(8080, function(){
     console.log('SERVIDOR AGUARDANDO REQUISIÇÕES NA PORTA 8080')
 })

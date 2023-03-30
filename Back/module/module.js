@@ -28,7 +28,8 @@ const getInfoAluno = function() {
             nome: lista.nome,
             foto: lista.foto,
             matricula: lista.matricula,
-            sexo: lista.sexo
+            sexo: lista.sexo,
+            status: lista.status
         }
         informacoes.push(listaInformacoesJson)
     })

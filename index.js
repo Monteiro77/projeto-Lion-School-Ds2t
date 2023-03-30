@@ -100,7 +100,7 @@ app.get('/v1/lion-school/alunos', cors(), async function (request, response, nex
 
 app.get('/v1/lion-school/alunos/:matricula', cors(), async function (request, response, next){
     let statusCode
-    let dadosAluno = {}
+    let dadosAluno = {} 
 
     let matriculaAluno = request.params.matricula
 

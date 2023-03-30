@@ -5,7 +5,7 @@
  * Versão: 1.0
  *****************************************************************************************************/
 //Import das dependencias do projeto
-const cursos = require('./module/module.js')
+const cursos = require('./Back/module/module.js')
 
 //Import do express
 const express = require('express');

@@ -55,6 +55,7 @@ const getMatricula = function(matricula){
                 foto: lista.foto,
                 matricula: lista.matricula,
                 sexo: lista.sexo,
+                status: lista.status,
                 nomeCurso: lista.curso[0].nome,
                 sigla: lista.curso[0].sigla,
                 icone: lista.curso[0].icone,
@@ -96,7 +97,8 @@ const getAlunosCurso = function(siglaCurso){
                 nome: lista.nome,
                 foto: lista.foto,
                 matricula: lista.nome,
-                sexo: lista.sexo
+                sexo: lista.sexo,
+                status: lista.status
             }
             informacoes.push(listaInformacoesJson)
         }

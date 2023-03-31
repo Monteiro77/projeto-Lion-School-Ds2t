@@ -100,7 +100,7 @@ const getAlunosCurso = function(siglaCurso){
                 sexo: lista.sexo,
                 status: lista.status,
                 curso: lista.curso[0].nome,
-                dataConclusago: lista.curso[0].conclusao
+                dataConclusao: lista.curso[0].conclusao
 
             }
             informacoes.push(listaInformacoesJson);

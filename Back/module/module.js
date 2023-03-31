@@ -98,7 +98,9 @@ const getAlunosCurso = function(siglaCurso){
                 foto: lista.foto,
                 matricula: lista.nome,
                 sexo: lista.sexo,
-                status: lista.status
+                status: lista.status,
+                curso: lista.curso[0].nome,
+                dataConclusão: lista.curso[0].conclusao
             }
             informacoes.push(listaInformacoesJson)
         }

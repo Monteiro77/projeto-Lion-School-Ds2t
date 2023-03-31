@@ -84,10 +84,10 @@ const getMatricula = function(matricula){
 
 const getAlunosCurso = function(siglaCurso){
 
-    let cursoSigla = siglaCurso.toUpperCase()
-    let listaInformacoesJson = {}
-    let informacoes = []
-    let alunos= {}
+    let cursoSigla = siglaCurso.toUpperCase();
+    let listaInformacoesJson = {};
+    let informacoes = [];
+    let alunos= {};
 
     let cursoAluno = listaAlunos.alunos
 
@@ -101,14 +101,15 @@ const getAlunosCurso = function(siglaCurso){
                 status: lista.status,
                 curso: lista.curso[0].nome,
                 dataConclusão: lista.curso[0].conclusao
+
             }
-            informacoes.push(listaInformacoesJson)
+            informacoes.push(listaInformacoesJson);
         }
     })
     alunos = {
         informacoes
     }
-    return alunos
+    return alunos;
 }
 
 const getStatusAluno = function(status){

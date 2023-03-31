@@ -89,7 +89,7 @@ const getAlunosCurso = function(siglaCurso){
     let informacoes = [];
     let alunos= {};
 
-    let cursoAluno = listaAlunos.alunos
+    let cursoAluno = listaAlunos.alunos;
 
     cursoAluno.forEach(function(lista){
         if(cursoSigla == lista.curso[0].sigla){

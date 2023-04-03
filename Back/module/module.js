@@ -129,7 +129,8 @@ const getStatusAluno = function(status){
                 foto: lista.foto,
                 matricula: lista.matricula,
                 sexo: lista.sexo,
-                status: lista.status
+                status: lista.status,
+                curso: lista.curso[0].nome
             }
             informacoes.push(listaInformacoesJson)
         }

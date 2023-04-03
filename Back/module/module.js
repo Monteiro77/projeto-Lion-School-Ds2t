@@ -41,6 +41,27 @@ const getInfoAluno = function() {
 }
 
 
+const getSigla = function(palavraNaoAbreviada){
+    let palavra = palavraNaoAbreviada
+
+    const ignorar = ['de', 'a', 'do', 'da', 'e', 'em', 'para', 'com', 'por', 'sem', 'sob']
+    let palavraDividida = palavra.split(' ')
+    let sigla = ''
+
+    if (palavraDividida.lenght == 1){
+        sigla = palavraDividida[0].slice(0, 2).toUpperCase()
+    }else{
+        for(let i = 0; i < palavraDividida.lenght; i++){
+            let palavra = palavraDividida[i]
+            if(!ignorar.includes(palavra)){
+                sigla += palavra.charAt(0)
+            }
+        }
+    }
+
+    return sigla.toUpperCase()
+} 
+
 
 const getMatricula = function(matricula){
     matriculaAluno = matricula
@@ -69,6 +90,7 @@ const getMatricula = function(matricula){
 
                 informacoesDisciplinasJson = {
                     nomeDisciplina: listaDisciplina.nome,
+                    sigla: getSigla(listaDisciplina.nome),
                     media: listaDisciplina.media,
                     status: listaDisciplina.status
                 }
@@ -147,7 +169,7 @@ const getStatusAluno = function(status){
 }
 
 
-
+console.log(getSigla('sistemas operacionais'));
 
 module.exports = {
     getCursos,

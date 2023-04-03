@@ -40,6 +40,8 @@ const getInfoAluno = function() {
 
 }
 
+
+
 const getMatricula = function(matricula){
     matriculaAluno = matricula
     let listaInformacoesJson = {}
@@ -143,6 +145,7 @@ const getStatusAluno = function(status){
     return alunos
 
 }
+
 
 
 

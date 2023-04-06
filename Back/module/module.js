@@ -42,24 +42,10 @@ const getInfoAluno = function() {
 
 
 const getSigla = function(palavraNaoAbreviada){
-    let palavra = palavraNaoAbreviada
-
-    const ignorar = ['de', 'a', 'do', 'da', 'e', 'em', 'para', 'com', 'por', 'sem', 'sob']
-    let palavraDividida = palavra.split(' ')
-    let sigla = ''
-
-    if (palavraDividida.lenght == 1){
-        sigla = palavraDividida[0].slice(0, 2).toUpperCase()
-    }else{
-        for(let i = 0; i < palavraDividida.lenght; i++){
-            let palavra = palavraDividida[i]
-            if(!ignorar.includes(palavra)){
-                sigla += palavra.charAt(0)
-            }
-        }
-    }
-
-    return sigla.toUpperCase()
+    let materias = palavraNaoAbreviada.replace(/\s(de|da|a|das)\s/g, ' ');
+    materias = materias.split(' ');
+    const initials = materias.map(materia => materia.charAt(0).toUpperCase());
+    return initials.join('')
 } 
 
 

@@ -45,7 +45,8 @@ const getSigla = function(palavraNaoAbreviada){
     let materias = palavraNaoAbreviada.replace(/\s(de|da|a|das)\s/g, ' ');
     materias = materias.split(' ');
     const initials = materias.map(materia => materia.charAt(0).toUpperCase());
-    return initials.join('')
+    return initials.join('');
+
 } 
 
 
@@ -140,7 +141,8 @@ const getStatusAluno = function(status){
                 matricula: lista.matricula,
                 sexo: lista.sexo,
                 status: lista.status,
-                curso: lista.curso[0].nome
+                curso: lista.curso[0].nome,
+                dataConclusao: lista.curso[0].conclusao
             }
             informacoes.push(listaInformacoesJson)
         }
@@ -155,7 +157,7 @@ const getStatusAluno = function(status){
 }
 
 
-console.log(getSigla('sistemas operacionais'));
+
 
 module.exports = {
     getCursos,

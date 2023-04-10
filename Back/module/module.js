@@ -12,6 +12,7 @@ var listaAlunos = require('../json/alunos.js')
 
 
 //Funções 
+
 const getCursos = function() {
     return listaCursos
 }

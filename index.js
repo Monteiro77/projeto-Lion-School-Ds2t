@@ -4,6 +4,7 @@
  * Autor: Vinícius Monteiro
  * Versão: 1.0
  *****************************************************************************************************/
+
 //Import das dependencias do projeto
 const cursos = require('./Back/module/module.js')
 
@@ -31,6 +32,9 @@ app.use((request, response, next) => {
    next();
 
 })
+
+
+//End Points
 
 app.get('/v1/lion-school/cursos', cors(), async function (request,response, next){
 

@@ -1,4 +1,4 @@
-var cursos = [
+const cursos = [
     {
         "nome"  :   "Técnico em Desenvolvimento de Sistemas",
         "sigla" :   "DS",

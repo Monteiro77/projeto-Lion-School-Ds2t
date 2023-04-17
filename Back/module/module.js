@@ -192,12 +192,43 @@ const getStatusAluno = function(status){
 const getAlunoCursoStatus = function(siglaCurso, statusAluno){
     let sigla = siglaCurso
     let status = statusAluno
+    let listaInformacoesJson = {}
+    let informacoes = []
+    let alunos = {}
+    let statusFunction = false
 
-    
+    let aluno = listaAlunos.alunos
 
+    aluno.forEach(function(lista){
+        if(sigla.toUpperCase() == lista.curso[0].sigla.toUpperCase() && status.toUpperCase() == lista.status.toUpperCase()){
+            listaInformacoesJson = {
+                nome: lista.nome,
+                foto: lista.foto,
+                matricula: lista.matricula,
+                sexo: lista.sexo,
+                status: lista.status
+            }
+            lista.curso.forEach(function(listaCursos){
+                listaInformacoesJson.curso = listaCursos.nome
+                listaInformacoesJson.dataConclusao = listaCursos.conclusao
+            })
+            informacoes.push(listaInformacoesJson)
+            statusFunction = true
+        }
+    })
 
+    alunos = {
+        informacoes
+    }
+
+    if(statusFunction){
+        return alunos
+    }else{
+        return statusFunction
+    }
 }
 
+console.log(getAlunoCursoStatus('ds', 'finalizado'));
 
 
 

@@ -14,7 +14,14 @@ var listaAlunos = require('../json/alunos.js')
 //Funções 
 
 const getCursos = function() {
-    return listaCursos
+    let status = false
+
+    if(listaCursos != undefined){
+        return listaCursos
+    }else{
+        return status
+    }
+    
 }
 
 
@@ -22,6 +29,7 @@ const getInfoAluno = function() {
     let listaInformacoesJson = {}
     let informacoes = []
     let alunos = {}
+    let status = false
 
     listaAlunos.alunos.forEach(function(lista){
         listaInformacoesJson = 
@@ -33,11 +41,17 @@ const getInfoAluno = function() {
             status: lista.status
         }
         informacoes.push(listaInformacoesJson)
+        status = true
     })
     alunos = {
         informacoes
     }
-    return alunos
+
+    if(status){
+        return alunos
+    }else{
+        return status
+    }
 
 }
 
@@ -56,6 +70,7 @@ const getMatricula = function(matricula){
     let listaInformacoesJson = {}
     let informacoesDisciplinasArray = []
     let informacoesDisciplinasJson
+    let status = false
     
     
 
@@ -85,12 +100,16 @@ const getMatricula = function(matricula){
                 informacoesDisciplinasArray.push(informacoesDisciplinasJson)
             })
 
-            
+            status = true
         }
     })
     
-
-    return listaInformacoesJson
+    if(status){
+        return listaInformacoesJson
+    }else{
+        return status
+    }
+    
 
 }
 
@@ -100,6 +119,7 @@ const getAlunosCurso = function(siglaCurso){
     let listaInformacoesJson = {};
     let informacoes = [];
     let alunos= {};
+    let status = false
 
     let cursoAluno = listaAlunos.alunos;
 
@@ -116,12 +136,18 @@ const getAlunosCurso = function(siglaCurso){
 
             }
             informacoes.push(listaInformacoesJson);
+            status = true
         }
     })
     alunos = {
         informacoes
     }
-    return alunos;
+    
+    if(status){
+        return alunos
+    }else{
+        return status
+    }
 }
 
 const getStatusAluno = function(status){
@@ -130,6 +156,7 @@ const getStatusAluno = function(status){
     let listaInformacoesJson = {}
     let informacoes = []
     let alunos = {}
+    let statusFunction = false
 
 
     let aluno = listaAlunos.alunos
@@ -146,6 +173,7 @@ const getStatusAluno = function(status){
                 dataConclusao: lista.curso[0].conclusao
             }
             informacoes.push(listaInformacoesJson)
+            statusFunction = true
         }
     })
 
@@ -153,7 +181,20 @@ const getStatusAluno = function(status){
         informacoes
     }
 
-    return alunos
+    if(statusFunction){
+        return alunos
+    }else{
+        return statusFunction
+    }
+
+}
+
+const getAlunoCursoStatus = function(siglaCurso, statusAluno){
+    let sigla = siglaCurso
+    let status = statusAluno
+
+    
+
 
 }
 

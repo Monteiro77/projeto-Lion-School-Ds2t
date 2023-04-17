@@ -9,10 +9,7 @@
 var listaCursos = require('../json/cursos.js')
 var listaAlunos = require('../json/alunos.js')
 
-
-
 //Funções 
-
 const getCursos = function() {
     let status = false
 
@@ -21,9 +18,7 @@ const getCursos = function() {
     }else{
         return status
     }
-    
 }
-
 
 const getInfoAluno = function() {
     let listaInformacoesJson = {}
@@ -52,7 +47,6 @@ const getInfoAluno = function() {
     }else{
         return status
     }
-
 }
 
 
@@ -61,9 +55,7 @@ const getSigla = function(palavraNaoAbreviada){
     materias = materias.split(' ');
     const initials = materias.map(materia => materia.charAt(0).toUpperCase());
     return initials.join('');
-
 } 
-
 
 const getMatricula = function(matricula){
     matriculaAluno = matricula
@@ -71,35 +63,34 @@ const getMatricula = function(matricula){
     let informacoesDisciplinasArray = []
     let informacoesDisciplinasJson
     let status = false
-    
-    
 
     listaAlunos.alunos.forEach(function(lista){
         if(matriculaAluno == lista.matricula){
-            listaInformacoesJson = {
-                nome: lista.nome,
-                foto: lista.foto,
-                matricula: lista.matricula,
-                sexo: lista.sexo,
-                status: lista.status,
-                nomeCurso: lista.curso[0].nome,
-                sigla: lista.curso[0].sigla,
-                icone: lista.curso[0].icone,
-                conclusao: lista.curso[0].conclusao
-            }
-
-            lista.curso[0].disciplinas.forEach(function(listaDisciplina){
-                listaInformacoesJson.disciplinas = informacoesDisciplinasArray
-
-                informacoesDisciplinasJson = {
-                    nomeDisciplina: listaDisciplina.nome,
-                    sigla: getSigla(listaDisciplina.nome),
-                    media: listaDisciplina.media,
-                    status: listaDisciplina.status
+            
+            lista.curso.forEach((cursos) => {
+                listaInformacoesJson = {
+                    nome: lista.nome,
+                    foto: lista.foto,
+                    matricula: lista.matricula,
+                    sexo: lista.sexo,
+                    status: lista.status,
+                    nomeCurso: cursos.nome,
+                    sigla: cursos.sigla,
+                    icone: cursos.icone,
+                    conclusao: cursos.conclusao
                 }
-                informacoesDisciplinasArray.push(informacoesDisciplinasJson)
-            })
 
+                cursos.disciplinas.forEach(function(listaDisciplina){
+                    listaInformacoesJson.disciplinas = informacoesDisciplinasArray
+                    informacoesDisciplinasJson = {
+                        nomeDisciplina: listaDisciplina.nome,
+                        sigla: getSigla(listaDisciplina.nome),
+                        media: listaDisciplina.media,
+                        status: listaDisciplina.status
+                    }
+                    informacoesDisciplinasArray.push(informacoesDisciplinasJson)
+                })
+            })
             status = true
         }
     })
@@ -109,12 +100,9 @@ const getMatricula = function(matricula){
     }else{
         return status
     }
-    
-
 }
 
 const getAlunosCurso = function(siglaCurso){
-
     let cursoSigla = siglaCurso.toUpperCase();
     let listaInformacoesJson = {};
     let informacoes = [];
@@ -124,21 +112,23 @@ const getAlunosCurso = function(siglaCurso){
     let cursoAluno = listaAlunos.alunos;
 
     cursoAluno.forEach(function(lista){
-        if(cursoSigla == lista.curso[0].sigla){
-            listaInformacoesJson = {
-                nome: lista.nome,
-                foto: lista.foto,
-                matricula: lista.matricula,
-                sexo: lista.sexo,
-                status: lista.status,
-                curso: lista.curso[0].nome,
-                dataConclusao: lista.curso[0].conclusao
-
+        lista.curso.forEach((cursos) => {
+            if(cursoSigla == lista.curso[0].sigla){
+                listaInformacoesJson = {
+                    nome: lista.nome,
+                    foto: lista.foto,
+                    matricula: lista.matricula,
+                    sexo: lista.sexo,
+                    status: lista.status,
+                    curso: cursos.nome,
+                    dataConclusao: cursos.conclusao
+                }
+                informacoes.push(listaInformacoesJson);
+                status = true
             }
-            informacoes.push(listaInformacoesJson);
-            status = true
-        }
+        })
     })
+
     alunos = {
         informacoes
     }
@@ -151,30 +141,30 @@ const getAlunosCurso = function(siglaCurso){
 }
 
 const getStatusAluno = function(status){
-
     let statusAluno = status
     let listaInformacoesJson = {}
     let informacoes = []
     let alunos = {}
     let statusFunction = false
 
-
     let aluno = listaAlunos.alunos
 
     aluno.forEach(function(lista){
-        if(statusAluno.toUpperCase() == lista.status.toUpperCase()){
-            listaInformacoesJson = {
-                nome: lista.nome,
-                foto: lista.foto,
-                matricula: lista.matricula,
-                sexo: lista.sexo,
-                status: lista.status,
-                curso: lista.curso[0].nome,
-                dataConclusao: lista.curso[0].conclusao
+        lista.curso.forEach((cursos) => {
+            if(statusAluno.toUpperCase() == lista.status.toUpperCase()){
+                listaInformacoesJson = {
+                    nome: lista.nome,
+                    foto: lista.foto,
+                    matricula: lista.matricula,
+                    sexo: lista.sexo,
+                    status: lista.status,
+                    curso: cursos.nome,
+                    dataConclusao: cursos.conclusao
+                }
+                informacoes.push(listaInformacoesJson)
+                statusFunction = true
             }
-            informacoes.push(listaInformacoesJson)
-            statusFunction = true
-        }
+        })
     })
 
     alunos = {
@@ -186,7 +176,6 @@ const getStatusAluno = function(status){
     }else{
         return statusFunction
     }
-
 }
 
 const getAlunoCursoStatus = function(siglaCurso, statusAluno){
@@ -200,21 +189,22 @@ const getAlunoCursoStatus = function(siglaCurso, statusAluno){
     let aluno = listaAlunos.alunos
 
     aluno.forEach(function(lista){
-        if(sigla.toUpperCase() == lista.curso[0].sigla.toUpperCase() && status.toUpperCase() == lista.status.toUpperCase()){
-            listaInformacoesJson = {
-                nome: lista.nome,
-                foto: lista.foto,
-                matricula: lista.matricula,
-                sexo: lista.sexo,
-                status: lista.status
+        
+        lista.curso.forEach((cursos) => {
+            if(sigla.toUpperCase() == cursos.sigla.toUpperCase() && status.toUpperCase() == lista.status.toUpperCase()){
+                listaInformacoesJson = {
+                    nome: lista.nome,
+                    foto: lista.foto,
+                    matricula: lista.matricula,
+                    sexo: lista.sexo,
+                    status: lista.status,
+                    curso: cursos.nome,
+                    dataConclusao: cursos.conclusao
+                }
+                informacoes.push(listaInformacoesJson)
+                statusFunction = true
             }
-            lista.curso.forEach(function(listaCursos){
-                listaInformacoesJson.curso = listaCursos.nome
-                listaInformacoesJson.dataConclusao = listaCursos.conclusao
-            })
-            informacoes.push(listaInformacoesJson)
-            statusFunction = true
-        }
+        })
     })
 
     alunos = {
@@ -228,14 +218,13 @@ const getAlunoCursoStatus = function(siglaCurso, statusAluno){
     }
 }
 
-console.log(getAlunoCursoStatus('ds', 'finalizado'));
-
-
+// console.log(getAlunoCursoStatus('rds', 'cursando'));
 
 module.exports = {
     getCursos,
     getInfoAluno,
     getMatricula,
     getAlunosCurso,
-    getStatusAluno
+    getStatusAluno,
+    getAlunoCursoStatus
 }

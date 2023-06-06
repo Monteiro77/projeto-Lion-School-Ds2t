@@ -106,6 +106,7 @@ const getAlunosCurso = function(siglaCurso){
     let cursoSigla = siglaCurso.toUpperCase();
     let listaInformacoesJson = {};
     let informacoes = [];
+    let curso = {};
     let alunos= {};
     let status = false
 
@@ -123,6 +124,7 @@ const getAlunosCurso = function(siglaCurso){
                     curso: cursos.nome,
                     dataConclusao: cursos.conclusao
                 }
+                curso.nomeCurso = lista.curso
                 informacoes.push(listaInformacoesJson);
                 status = true
             }
@@ -130,6 +132,7 @@ const getAlunosCurso = function(siglaCurso){
     })
 
     alunos = {
+        curso,
         informacoes
     }
     

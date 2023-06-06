@@ -134,7 +134,7 @@ const getAlunosCurso = function(siglaCurso){
     })
 
     alunos = {
-        curso,
+        nomeCurso,
         informacoes
     }
     

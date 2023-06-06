@@ -124,7 +124,9 @@ const getAlunosCurso = function(siglaCurso){
                     curso: cursos.nome,
                     dataConclusao: cursos.conclusao
                 }
-                curso.nomeCurso = lista.curso.nome
+                curso = {
+                    nomeCurso: cursos.nome
+                }
                 informacoes.push(listaInformacoesJson);
                 status = true
             }
